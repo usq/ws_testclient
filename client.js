@@ -11,17 +11,28 @@ $(document).ready(function() {
 		$('#response').html('client id: ' + clientid);
 	    },
 	    
-	    msg:function(x)  {
-		$('#response').append('<br/>' + x.content);
+	    msg:function(message) {
+		var el = $('#response')
+		el.append('<br/>' + message.content);
+		el.scrollTop(el[0].scrollHeight);
 	    }
 	}
     });
 
+    function send() {
+	let clientResponse = $("#responsemessage").val();
+	let responseObject = {'textresponse': clientResponse, 'clientid' : clientid };
+	ws.send('message', responseObject);
+	$("#responsemessage").val("");
+    }
+    
     $('#sendbutton').click(function() {
-	let clientResponse = $("#responsemessage").val()
-	let responseObject = {'textresponse': clientResponse, 'clientid' : clientid }
-	ws.send('message', responseObject)
-	$("#responsemessage").val("")
+	send();
     });
 
+    $("#responsemessage").keyup(function (e) {
+	if (e.keyCode == 13) {
+	    send();
+	}
+    })
 });
