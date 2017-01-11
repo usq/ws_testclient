@@ -7,7 +7,7 @@ $(document).ready(function() {
 	},
 	events: {
 	    idmsg:function(x) {
-		clientid = x.content
+		clientid = x.content.idm
 		$('#response').html('client id: ' + clientid);
 	    },
 	    
