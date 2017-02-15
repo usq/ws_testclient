@@ -1,7 +1,7 @@
 $(document).ready(function() {
-
+    var ip = "131.159.200.108"
     var clientid
-    var ws = $.websocket("ws://Mimas.local:8080/",{
+    var ws = $.websocket("ws://" + ip + ":8080/",{    
 	open: function() {
 	    $('#response').html('Connected');
 	},

@@ -1,16 +1,16 @@
 $(document).ready(function() {
-    var transmissionSpeed = 50;
+    var transmissionSpeed = 30;
     var master = false
     var cv = $("#cv")
     var ctx = cv[0].getContext("2d");
-
+    var ip = "131.159.200.108"
     //loop
     var player = {y:0}
     var other = {y:0}
     var ball = {x:200, y:200}
     var ballvec = {x:0, y:0}
     var direction = 0;
-    var speed = 4;
+    var speed = 8;
     var rad = 4;
 
     $(document).keyup(function(e){ direction = 0;});
@@ -27,9 +27,9 @@ $(document).ready(function() {
     });
     
     var clientid = -1;
-    var ws = $.websocket("ws://Mimas.local:8080/",{
+        var ws = $.websocket("ws://" + ip + ":8080/",{
+
 	open: function() {
-	    //	    $('#response').html('Connected');
 	    console.log('connected')
 
 	    var timer = setInterval(function(){
@@ -55,7 +55,7 @@ $(document).ready(function() {
 		    if (ball.x <= 0 || ball.x >= 400) {
 			ball.x = 200
 			ball.y = 200
-			ballvec.x = (Math.random() + 0.5)* -2
+			ballvec.x = (Math.random() - 0.5)* -4
 			ballvec.y = Math.random() * 5 - 0.25
 		    }
 
